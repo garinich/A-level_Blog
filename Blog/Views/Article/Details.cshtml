@@ -1,0 +1,13 @@
+@model Blog.Models.ArticleViewModel
+
+@{
+    ViewBag.Title = "Article Details - " + @Model.Article.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Article.Title</h2>
+<h3>
+    @Html.ActionLink(@Model.Article.Author.Name, "Details", "Author", new { Id = @Model.Article.Author.Id }, null)
+</h3>
+<h4>@Model.Article.DateCreation.ToShortDateString()</h4>
+<div class="content"><p>@Model.Article.Content</p></div>

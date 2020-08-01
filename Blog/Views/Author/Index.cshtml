@@ -1,0 +1,40 @@
+@model Blog.Models.AllAuthorViewModel
+
+@{
+    ViewBag.Title = "All Authors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Authors</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Articles</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var author in Model.Authors)
+    {
+        <tr>
+            <td>@author.Id</td>
+            <td>
+                @Html.ActionLink(author.Name, "Details", "Author", new { Id = author.Id }, null)
+            </td>
+            <td>
+                <ul>
+                    @foreach (var article in author.Articles)
+                    {
+                        <li>
+                            @Html.ActionLink(article.Title, "Details", "Article", new { Id = article.Id }, null)
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                @Html.ActionLink("View", "Details", "Author", new { Id = author.Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,38 @@
+@model Blog.Models.AllArticleViewModel
+
+@{
+    ViewBag.Title = "Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    All Articles
+    @Html.ActionLink("Add New Article", "Create", "Article", null, new { @class = "btn btn-danger align-right" })
+</h2>
+
+<div class="main">
+    <div class="row">
+    @foreach (var article in Model.Articles)
+    {
+        <div class="card col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>
+                        @Html.ActionLink(article.Title, "Details", "Article", new { Id = article.Id }, null)
+                    </h3>
+                    <h5>
+                        @Html.ActionLink(article.Author.Name, "Details", "Author", new { Id = article.Author.Id }, null)
+                    </h5>
+                    <h5>@article.DateCreation.ToShortDateString()</h5>
+                    <p>@article.Description</p>
+                    <p>
+                        @Html.ActionLink("View", "Details", "Article", new { Id = article.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "Edit", "Article", new { Id = article.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Delete", "Delete", "Article", new { Id = article.Id }, new { @class = "btn btn-danger align-right" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>

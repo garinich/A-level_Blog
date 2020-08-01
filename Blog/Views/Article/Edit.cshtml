@@ -1,0 +1,32 @@
+@model Blog.Models.EditArticleViewModel
+
+@{
+    ViewBag.Title = "Edit Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Article</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(model => model.Article.Id, new { Name = "Title", htmlAttributes = new { Type="hidden" }})
+    <div class="form-group">
+        <label>Title</label>
+        @Html.EditorFor(model => model.Article.Title, new { Name = "Title", htmlAttributes = new { @class = "form-control" }})
+    </div>
+    <div class="form-group">
+        <label>Author</label>
+        @Html.DropDownListFor(model => model.Article.Author.Id,
+                        @Model.Select,
+                        new { Name = "Article.AuthorId", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        @Html.EditorFor(model => model.Article.Description, new { Name = "Description", htmlAttributes = new { @class = "form-control" }})
+    </div>
+    <div class="form-group">
+        <label>Content</label>
+        @Html.EditorFor(model => model.Article.Content, new { Name = "Content", htmlAttributes = new { @class = "form-control" }})
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+}
